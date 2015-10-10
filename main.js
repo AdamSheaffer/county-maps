@@ -4,7 +4,7 @@ var app = angular.module('countyMap', ['datamaps']);
 
 app.controller('mapController', function($scope) {
 
-  //Configure the datamap object. Should we allow for customizable colors?
+  //Configure the datamap object.
   $scope.tennessee = {
     scope: 'tn_counties',
     geographyConfig: {
@@ -15,7 +15,7 @@ app.controller('mapController', function($scope) {
     options: {
       staticGeoData: true
     },
-    fills: {
+    fills: $scope.fills || {
       'selected': '#a55',
       'defaultFill': '#cdcdcd'
     },
@@ -91,7 +91,8 @@ app.directive('countyMap', function() {
     scope: {
       'selectedCounties': '=',
       'key': '@',
-      'counties': '='
+      'counties': '=',
+      'fills': '='
     }
   };
 });

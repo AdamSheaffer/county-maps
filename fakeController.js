@@ -30,4 +30,9 @@ app.controller('mainController', function($scope) {
     else
       $scope.selectedCounties.splice(idx, 1);
   };
+
+  $scope.customFills = {
+    selected: '#bada55',
+    defaultFill: '#909090'
+  }
 });
