@@ -2,40 +2,9 @@
 
 var app = angular.module('countyMap', ['datamaps']);
 
-app.controller('mainController', function($scope) {
-  $scope.counties = [
-    {
-      'id': 1,
-      'name': 'Davidson',
-      'region': 3
-    }, {
-      'id': 2,
-      'name': 'Coffee',
-      'region': 2
-    }, {
-      'id': 3,
-      'name': 'Williamson',
-      'region': 1
-    }, {
-      'id': 4,
-      'name': 'Knox',
-      'region': 4
-    }
-  ];
-
-  $scope.selectedCounties = [];
-
-  $scope.toggleCounty = function(county) {
-    var idx = $scope.selectedCounties.indexOf(county);
-    if (idx < 0)
-      $scope.selectedCounties.push(county);
-    else
-      $scope.selectedCounties.splice(idx, 1);
-  };
-});
-
 app.controller('mapController', function($scope) {
 
+  //Configure the datamap object. Should we allow for customizable colors?
   $scope.tennessee = {
     scope: 'tn_counties',
     geographyConfig: {
@@ -70,7 +39,9 @@ app.controller('mapController', function($scope) {
     }
   };
 
-  $scope.$watch('selectedCounties', function(newVal, oldVal) {
+  //Registers a listener on the selectedCounties list. TODO refactor code and
+  //unregister listener on $destory.
+  var unregister = $scope.$watch('selectedCounties', function(newVal, oldVal) {
     var newNames = _.pluck(newVal, $scope.key);
     var oldNames = _.pluck(oldVal, $scope.key);
     var longerCollection = newNames.length > oldNames.length ? newNames : oldNames;
@@ -79,6 +50,8 @@ app.controller('mapController', function($scope) {
     $scope.colorCounty(difference[0]);
   }, true);
 
+  //Handles the coloring of the map. TODO should we allow for single county
+  //and multiple county selection?
   $scope.colorCounty = function(countyName) {
     var countyNotSelected = _.filter($scope.selectedCounties, function(county) {
       return county[$scope.key] === countyName;
@@ -90,6 +63,9 @@ app.controller('mapController', function($scope) {
     }
   };
 
+  //Updates selectedCounties. TODO refactor and update if we are allowing
+  //single county selection. Also need to handle possibilty that $scope.counties
+  //comes in a casing that is inconsistent with our own.
   $scope.toggleCounty = function(geography) {
     var countyNotSelected = _.filter($scope.selectedCounties, function(county) {
       return county[$scope.key] === geography.id;
