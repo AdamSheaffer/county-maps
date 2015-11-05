@@ -3,11 +3,16 @@
 (function() {
   'use strict';
 
-  var app = angular.module('countyMapDemo', ['countyMap', 'checklist-model']);
+  var app = angular.module('countyMapDemo', ['countyMap', 'checklist-model', 'ui.select']);
 
   app.controller('mockController', function($scope) {
 
     $scope.selectedCounties = [];
+
+    $scope.selection = {
+        selectedCounty : {
+      }
+    };
 
     $scope.mapOptions = {
       'multiple' : true,
