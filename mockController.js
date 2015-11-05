@@ -7,18 +7,11 @@
 
   app.controller('mockController', function($scope) {
 
-    $scope.selectedCounties = [];
-
-    $scope.selection = {
-        selectedCounty : {
-      }
-    };
-
     $scope.mapOptions = {
       'multiple' : true,
       'fills' : {
-        'selected' : '#0000ff',
-        'defaultFill' : '#ff0000'
+        'selected' : 'tomato',
+        'defaultFill' : 'lightblue'
       },
       'onAfterCountySelect' : function(newCounty, geography) {
         //console.log(newCounty);
@@ -124,5 +117,15 @@
       { Latitude: 35.900204, Longitude: -86.907571, ZoomLevel: 10, name: 'WILLIAMSON' },
       { Latitude: 36.145523, Longitude: -86.304507, ZoomLevel: 10, name: 'WILSON' }
     ];
+
+    $scope.selection = {
+        selectedCounties : [
+          $scope.counties[0],
+          $scope.counties[1],
+          $scope.counties[2],
+          $scope.counties[3],
+          $scope.counties[4],
+        ]
+    };
   });
 }());

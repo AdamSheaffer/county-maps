@@ -10,14 +10,14 @@
 </head>
 <body ng-controller="mockController">
   <county-map
-    selected-counties="selection.selectedCounty"
+    selected-counties="selection.selectedCounties"
     key="name"
     counties="counties"
-    ptions="mapOptions">
+    options="mapOptions">
   </county-map>
-  <ui-select ng-model="selection.selectedCounty" style="width: 400px;">
-    <ui-select-match>
-      <span ng-bind="$select.selected.name"></span>
+  <ui-select ng-model="selection.selectedCounties" style="width: 400px;" multiple>
+    <ui-select-match placeholder="select counties...">
+      {{$item.name}}
     </ui-select-match>
     <ui-select-choices repeat="county in counties">
       <span ng-bind="county.name"></span>
