@@ -48,7 +48,7 @@
 
         return {
           path: path,
-            projection: projection
+          projection: projection
         };
       }
     };
@@ -141,6 +141,7 @@
           $scope.options.onAfterCountySelect(clickedCounty, geography);
         }
       }
+
     }
   }]);
 
