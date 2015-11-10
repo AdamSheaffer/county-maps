@@ -119,13 +119,7 @@
     ];
 
     $scope.selection = {
-        selectedCounties : [
-          $scope.counties[0],
-          $scope.counties[1],
-          $scope.counties[2],
-          $scope.counties[3],
-          $scope.counties[4],
-        ]
+        selectedCounties : null
     };
   });
 }());
